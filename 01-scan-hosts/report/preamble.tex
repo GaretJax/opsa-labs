@@ -1,0 +1,59 @@
+% Use UTF-8 for plain tex files
+\usepackage[utf8]{inputenc}
+
+% Set the margin from the page side
+\usepackage[margin=3cm]{geometry}
+
+% Leave out page numbers on empty pages
+\let\origdoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+
+% Don't indent paragrpahs, instead separate them
+\usepackage{parskip}
+\setlength{\parskip}{5mm plus2mm minus3mm}
+\setlength{\parindent}{0cm}
+
+% Use alternative font (see http://www.tug.dk/FontCatalogue/ for alternatives)
+\usepackage{cmbright}
+\renewcommand*\familydefault{\sfdefault} % Set the default font to be sans-serif
+\linespread{1.05}         % Palatino needs more leading (space between lines)
+\usepackage[T1]{fontenc}
+
+% Allow URL typesetting
+\usepackage{url}
+
+% Customize headers and footers
+\usepackage{fancyhdr}
+
+% Includegraphics support
+\usepackage{graphicx}
+
+% Allows to change text color
+\usepackage{color}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% Assign the LastPage label to the last page
+\usepackage{lastpage}
+
+% TODO: Add description
+\usepackage{hyperref}
+
+% Enable the creation of appendices
+\usepackage{appendix}
+
+% Set layout lenghts
+\setlength{\headheight}{8mm}
+\setlength{\footskip}{1.5cm}
+\addtolength{\textheight}{-.5cm}
+
+% Set titles whitespace
+\usepackage{titlesec}
+\titlespacing{\section}{0mm}{8mm}{1mm}
+\titlespacing{\subsection}{0mm}{3mm}{-2mm}
+\titlespacing{\subsubsection}{0mm}{2mm}{-1mm}
+
+% Miscellaneous
+\definecolor{mselogogray}{RGB}{96,101,109} % Color definition for the MSE logo
