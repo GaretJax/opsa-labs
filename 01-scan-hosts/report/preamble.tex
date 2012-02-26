@@ -1,6 +1,9 @@
 % Use UTF-8 for plain tex files
 \usepackage[utf8]{inputenc}
 
+% Advanced math support
+\usepackage{amsmath}
+
 % Set the margin from the page side
 \usepackage[margin=3cm]{geometry}
 
@@ -19,11 +22,25 @@
 % Use alternative font (see http://www.tug.dk/FontCatalogue/ for alternatives)
 \usepackage{cmbright}
 \renewcommand*\familydefault{\sfdefault} % Set the default font to be sans-serif
-\linespread{1.05}         % Palatino needs more leading (space between lines)
 \usepackage[T1]{fontenc}
+
+% Set line height multiplicity
+\linespread{1.05}
 
 % Allow URL typesetting
 \usepackage{url}
+
+% Customize captions appearances 
+\usepackage[margin=1cm]{caption}
+\DeclareCaptionFormat{listing}{{\em #1#2#3}}
+\captionsetup{
+	format=listing,
+	font={small},
+}
+
+% Enable advanced style specifications for the basic listing environments
+% (enumerate, itemize, description)
+\usepackage{enumitem}
 
 % Customize headers and footers
 \usepackage{fancyhdr}
@@ -32,8 +49,7 @@
 \usepackage{graphicx}
 
 % Allows to change text color
-\usepackage{color}
-\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[usenames,dvipsnames,table<D-+>]{xcolor}
 
 % Assign the LastPage label to the last page
 \usepackage{lastpage}
@@ -55,5 +71,58 @@
 \titlespacing{\subsection}{0mm}{3mm}{-2mm}
 \titlespacing{\subsubsection}{0mm}{2mm}{-1mm}
 
-% Miscellaneous
+% Enable code listings and set default options
+\usepackage{listings}
+\usepackage{courier} % Use Adobe Courier instead of Computer Modern Typewriter
+                     % for monospaced text
+\lstloadlanguages{python,bash,sh,xml}
+\lstset{
+	language=python,
+	basicstyle=\footnotesize\ttfamily,
+	stringstyle=\color{OliveGreen},
+	numbers=left,
+	numberstyle=\color{gray}\tiny,
+	commentstyle=\color{magenta},
+	keywordstyle=\color{MidnightBlue}\bfseries,
+	frame=bt,
+	rulecolor=\color{lightgray},
+	numbersep=7pt,
+	escapechar=!,
+	extendedchars=true,
+	captionpos=t,
+	breaklines=true,
+	showspaces=false,
+	showtabs=false,
+	tabsize=4, 
+	xleftmargin=20pt,
+	framexleftmargin=20pt,
+	framexrightmargin=0pt,
+	framexbottommargin=0pt,
+	showstringspaces=false,
+}
+
+% Limit the TOC dept to sections and subsections
+\setcounter{tocdepth}{2}
+
+\usepackage{multirow} % Enable columns spawning multiple rows
+\usepackage{tabularx}
+\usepackage{booktabs} % Provides {top|middle|bottom}rule
+\usepackage{longtable} % Support for tables spawning multiple pages, captions and footnotes
+                       % Does not work in multicolumn environments
+% Define new tabularx column types:
+%  - R: streteched right aligned
+%  - C: stretched centered
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+\renewcommand{\arraystretch}{1.3} % Set row height multiplicator
+\usepackage{threeparttable} % Manual footnotes counter
+
+
+% Color definitions
+\definecolor{highlightyellow}{RGB}{255,255,140}
 \definecolor{mselogogray}{RGB}{96,101,109} % Color definition for the MSE logo
+
+% Enable highlighting using \HighlightFrom and \HighlightTo
+\usepackage{classes/highlighter}
+\tikzset{highlighter/.style = {highlightyellow, line width = \baselineskip*.75}}
+ 
