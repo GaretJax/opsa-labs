@@ -1,0 +1,14 @@
+rootx@ThinkPad-T61p:~$ sudo nmap -sU -PN -p 1-1024 160.98.21.224
+
+stealth mode
+
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-02-20 13:15 CET
+Nmap scan report for Culhaven.sofr.hefr.lan (160.98.21.224)
+Host is up (0.00092s latency).
+Not shown: 1022 open|filtered ports
+PORT    STATE SERVICE
+123/udp open  ntp
+137/udp open  netbios-ns
+MAC Address: D4:9A:20:C5:8E:3E (Apple)
+
+Nmap done: 1 IP address (1 host up) scanned in 19.15 seconds

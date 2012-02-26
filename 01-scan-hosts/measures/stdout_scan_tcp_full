@@ -1,0 +1,16 @@
+nmap -sV -PN 160.98.21.224
+
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-02-20 13:01 CET
+Nmap scan report for Culhaven.sofr.hefr.lan (160.98.21.224)
+Host is up (0.00075s latency).
+Not shown: 963 closed ports, 32 filtered ports
+PORT      STATE SERVICE      VERSION
+22/tcp    open  ssh          OpenSSH 5.6 (protocol 2.0)
+80/tcp    open  http         Apache httpd 2.2.21 ((Unix) mod_ssl/2.2.21 OpenSSL/0.9.8r DAV/2 PHP/5.3.8 with Suhosin-Patch)
+88/tcp    open  kerberos-sec Microsoft Windows kerberos-sec
+5900/tcp  open  vnc          Apple remote desktop vnc
+49152/tcp open  http         Apple ODS DVD/CD Sharing Agent httpd 1.0
+Service Info: OSs: Windows, Mac OS X
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.94 seconds
+

@@ -1,0 +1,15 @@
+rootx@ThinkPad-T61p:~$ sudo nmap -sU -PN -p 1-1024 160.98.21.224
+
+custom server
+
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-02-20 13:12 CET
+Nmap scan report for Culhaven.sofr.hefr.lan (160.98.21.224)
+Host is up (0.00074s latency).
+Not shown: 521 open|filtered ports, 500 closed ports
+PORT     STATE SERVICE
+123/udp  open  ntp
+137/udp  open  netbios-ns
+1024/udp open  unknown <-- custom server
+MAC Address: D4:9A:20:C5:8E:3E (Apple)
+
+Nmap done: 1 IP address (1 host up) scanned in 3.24 seconds

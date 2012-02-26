@@ -1,0 +1,14 @@
+rootx@ThinkPad-T61p:~$ nmap -sV -PN 160.98.21.224
+
+services disables
+
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-02-20 13:02 CET
+Nmap scan report for Culhaven.sofr.hefr.lan (160.98.21.224)
+Host is up (0.0010s latency).
+Not shown: 967 closed ports, 31 filtered ports
+PORT      STATE SERVICE      VERSION
+88/tcp    open  kerberos-sec Microsoft Windows kerberos-sec
+49152/tcp open  http         Apple ODS DVD/CD Sharing Agent httpd 1.0
+Service Info: OS: Windows
+
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
