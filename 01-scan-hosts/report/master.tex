@@ -447,19 +447,28 @@ In order to provide a more statistically correct and reliable result, many addit
 
 \section{Conclusions}
 
-TODO
+In this report, we explained how to scan a host using the \texttt{nmap} program, how to analyze the results and how to compare them with a local process listing.
 
-\section{References}
+While the TCP scans gave stable results, UDP was harder to interpret because of the timeout and the possibility of packet loss. This problem was circumvented by using a slower timing template, but that came at the expense of scan time and still does not offer absolute guarantees about the \texttt{open|filtered} results. Other program exist, like \texttt{unicornscan}, and they can give different results because of the different datagram payloads (adapted to the scan target).
+
+For the security measurement, we offer a method to score the security level based on three factors. This method gives an idea of the security and could be extended with other parameters to increase the precision of the evaluation, but in its actual state it is too simplistic to provide a reliable valutation.
+
+To conclude, a server leaks several information like OS, deamon and program versions. It is important to limit this information leaks to reduce the surface of attack and by this, to increase the security level.
+
+\clearpage
+\usection{References}
 
 \begin{itemize}
 	\item \url{http://nmap.org/book/man.html}\\Complete official manual page of the \texttt{nmap} command.
-	\item \url{http://www.netadmintools.com/html/lsof.man.html}\\Manual page for the \texttt{lsof} command
-	\item \url{http://support.apple.com/kb/TS1629}\\Well known TCP and UDP ports used by Apple software products
-	\item \url{http://support.apple.com/kb/HT1810}\\Application Firewall Guide for Mac OS X 10.5 and later
-	\item \url{http://www.isecom.org/mirror/OSSTMM.3.pdf}\\OSSTMM: The Open Source Security Testing Methodology Manual
+	\item \url{http://www.netadmintools.com/html/lsof.man.html}\\Manual page of the \texttt{lsof} command.
+	\item \url{http://support.apple.com/kb/TS1629}\\Well known TCP and UDP ports used by Apple software products.
+	\item \url{http://support.apple.com/kb/HT1810}\\Application Firewall Guide for Mac OS X 10.5 and later.
+	\item \url{http://www.isecom.org/mirror/OSSTMM.3.pdf}\\OSSTMM: The Open Source Security Testing Methodology Manual.
 	\item \href{http://ututi.com/subject/vu/mif/programu-sistemu-testavimas/file/7400/get}{\texttt{http://ututi.com/...mu-testavimas/file/7400/get}}\\Calculating Risk Assesment Values
-	\item \url{http://nvd.nist.gov/}\\National Vulnerability Database of the USA
+	\item \url{http://nvd.nist.gov/}\\National Vulnerability Database of the USA.
 \end{itemize}
+
+\clearpage
 
 \appendix
 \section{Custom UDP server}
@@ -498,7 +507,7 @@ If you want to listen on a privileged port, remember to run it through with admi
 sudo python server.py PRIVILEGED-PORT-NUMBER
 \end{lstlisting}
 
-To stop a running server, simply press \texttt{Ctrl-C} or send a \texttt{SIGINT} signal to the process.
+To stop a running server, simply press \texttt{Ctrl-C} or send a \texttt{SIGINT} signal to its process.
 
 
 
