@@ -6,7 +6,6 @@ You can run this file by executing:
 on the command line. The twisted networking library is
 required in order to run the server.
 """
-
 import sys
 
 from twisted.internet.protocol import DatagramProtocol
