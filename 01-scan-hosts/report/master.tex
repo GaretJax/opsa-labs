@@ -1,7 +1,13 @@
 \documentclass[10pt,a4paper,twoside,onecolumn]{article}
 
 \input{preamble}
+
+\settitle{Lab. 01 -- Port Scan}{Certified IT Security}
+\addauthor{Julien Oberson}
+\addauthor{Jonathan Stoppani}
+
 \input{headers-footers}
+
 
 \begin{document}
 
@@ -420,7 +426,7 @@ The overall security grade is then calculated as shown in \autoref{eq:fact} and 
 	\label{eq:fact}
 Factor &= \sum\limits^{ports}{N_{vuln} \cdot E_{factor} \cdot {C_{max}}^2}\\
 	\label{eq:sec}
-   Security &= \exp\left({Factor \over 75}\right)
+   Security &= \exp\left(-{Factor \over 75}\right)
 \end{align}
 
 \begin{figure}[ht]
@@ -438,7 +444,7 @@ Based on the measurements and considerations expressed in the previous sub secti
 			 &= 1037.88 + 36.98 + 34 \nonumber\\
 			 &= 1108.86\nonumber\\
 	\label{eq:sec-sys}
-	Security &= \exp\left({1108.96\over75}\right) = 3.788 \times 10^{-7} = 0.00004\%
+	Security &= \exp\left(-{1108.96\over75}\right) = 3.788 \times 10^{-7} = 0.00004\%
 \end{align}
 
 The resulting security grade is extremely low, but considering on one side the high number of security flaws in the \texttt{ssh} package and, on the other side, the simplicity of our empirically crafted formula, such a value is expected.

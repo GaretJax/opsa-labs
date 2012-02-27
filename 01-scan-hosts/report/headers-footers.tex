@@ -4,25 +4,24 @@
 \renewcommand{\footrulewidth}{0.6pt}
 
 \fancyhead[LE]{%
-	\raisebox{-0.15mm}{%
+	\raisebox{-0.35mm}{%
 		\includegraphics[height=6.3mm]{images/logo_mse_small}
 		\hspace{5mm}\color{mselogogray}\rule[0mm]{0.5pt}{6mm}\hspace{4mm}}
 	\begin{minipage}[b]{0.5\linewidth}
-		\textcolor{mselogogray}{\uppercase{\scriptsize
-			Certified IT Security\\[-1mm]
-			Lab. 01 -- Port Scan}}
+		\textcolor{mselogogray}{\scriptsize
+		\MakeUppercase{\subtitle}\\[-1mm]\MakeUppercase{\doctitle}
+		}
 	\end{minipage}%
 }
 
 \fancyhead[RO]{%
 	\begin{minipage}[b]{0.5\linewidth}
 	\begin{flushright}
-		\textcolor{mselogogray}{\uppercase{\scriptsize
-			Julien Oberson\\[-1mm]
-			Jonathan Stoppani}}
+	    \renewcommand{\fmtauthor}[1]{\MakeUppercase{##1}}
+		\scriptsize\textcolor{mselogogray}{\authorlines}%
 	\end{flushright}
 	\end{minipage}
-	\raisebox{-0.15mm}{%
+	\raisebox{-0.35mm}{%
 		\hspace{4mm}\color{mselogogray}\rule[0mm]{0.5pt}{6mm}\hspace{5mm}
 		\includegraphics[height=6.3mm]{images/logo_mse_small}%
 	}%
