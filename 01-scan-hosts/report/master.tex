@@ -403,7 +403,48 @@ The definition of exposure for the inspected target highly depends on its usage:
 
 In this case, we consider the machine as a generic server providing services such as file sharing, printing and web hosting to the users of a network. In this case, the following softwares have no reason to be running: \texttt{Printopia}, \texttt{Dropbox} and \texttt{Growl}.
 
+\subsubsection{Security Policy}
+
+Security policies explicitly define the services which have to run on a system in order to address its purpose. A security policy has to be used in oorder to define the exposure of a system in accordance with the definition previously provided.
+
+In our case, we propose three different security policies by defining the services necessary to each of them and then we'll chose one for the final security level calculation. The three presented security policies are a web server, a generic server and a desktop. For the RAV calculation in \autoref{sec:rav}, we have choosen the generic server profile.
+
+The \autoref{tab:policies} resumes the different available services and the policies for the three different use cases.
+
+\begin{table}
+\begin{center}
+\begin{threeparttable}[b]
+\begin{tabularx}{\textwidth}{ l | X | c c c }
+
+\toprule
+
+% Headers
+Service & Description & Web & Generic & Desktop \\
+
+\hline
+
+% Contents
+sshd & Secure remote shell access & $\checkmark$ & $\checkmark$ & $\times$ \\
+httpd & Web server & $\checkmark$ & $\checkmark$ & $\times$ \\
+afp & Network protocol that offers file services for Mac OS X & $\times$ & $\checkmark$ & $\checkmark$\\
+cupsd & Print server & $\times$ & $\checkmark$ & $\times$\\
+Printopia & Print server for AirPrint wireless devices & $\times$ & $\times$ & $\checkmark$\\
+Dropbox & Dropbox deamon to access user file share & $\times$ & $\times$ & $\checkmark$\\
+Growl & Program for Mac OS X that allows to send notifications & $\times$ & $\times$ & $\checkmark$\\
+ntpd & Network Time Protocol daemon for time management & $\checkmark$ & $\checkmark$ & $\checkmark$\\
+netbiosd & Name services NetBIOS (necessary for \texttt{afp}) & $\times$ & $\checkmark$ & $\checkmark$\\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Description of available services and of the different security policies}
+\label{tab:policies}
+\end{threeparttable}
+\end{center}
+\end{table}
+
 \subsection{Risk Assessment Value}
+\label{sec:rav}
 
 Our audit is over-simplistic and the collected data does not suffice to calculate a reliable RAV, we tried to apply the model just the same but having only 3 factors at our disposal made the task too difficult. We invented thus our own measurement scale based on the following "per port" factors:
 
@@ -436,7 +477,7 @@ Factor &= \sum\limits^{ports}{N_{vuln} \cdot E_{factor} \cdot {C_{max}}^2}\\
 	\label{fig:sec-plot}
 \end{figure}
 
-Based on the measurements and considerations expressed in the previous sub sections, we can calculate the $Security$ value for the target host by applying the formulas \ref{eq:fact} and \ref{eq:sec} as shown in the \autoref{eq:sec-sys}.
+Based on the measurements and considerations expressed in the previous sub sections and using the \emph{Generic server} security policy, we can calculate the $Security$ value for the target host by applying the formulas \ref{eq:fact} and \ref{eq:sec} as shown in the \autoref{eq:sec-sys}.
 
 \vspace{-.5cm}
 \begin{align}
@@ -461,7 +502,7 @@ For the security measurement, we offer a method to score the security level base
 
 To conclude, a server leaks several information like OS, deamon and program versions. It is important to limit this information leaks to reduce the surface of attack and by this, to increase the security level.
 
-\clearpage
+%\clearpage
 \usection{References}
 
 \begin{itemize}
