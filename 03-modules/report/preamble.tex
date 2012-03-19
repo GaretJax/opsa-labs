@@ -1,0 +1,179 @@
+% Use UTF-8 for plain tex files
+\usepackage[utf8]{inputenc}
+
+% Advanced math support
+\usepackage{amsmath}
+
+% Set the margin from the page side
+\usepackage[margin=3cm]{geometry}
+
+% Support for internal links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=black,
+}
+
+% Leave out page numbers on empty pages
+\let\origdoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+
+% Don't indent paragrpahs, instead separate them
+\usepackage{parskip}
+\setlength{\parskip}{5mm plus2mm minus3mm}
+\setlength{\parindent}{0cm}
+
+% Use alternative font (see http://www.tug.dk/FontCatalogue/ for alternatives)
+\usepackage{cmbright}
+\renewcommand*\familydefault{\sfdefault} % Set the default font to be sans-serif
+\usepackage[T1]{fontenc}
+
+% Set line height multiplicity
+\linespread{1.05}
+
+% Allow URL typesetting
+\usepackage{url}
+
+% Allow advanced list typesetting
+\usepackage{enumitem}
+
+% Customize captions appearances 
+\usepackage[margin=1cm]{caption}
+\DeclareCaptionFormat{listing}{{\em #1#2#3}}
+\captionsetup{
+	format=listing,
+	font={small},
+}
+
+% Enable advanced style specifications for the basic listing environments
+% (enumerate, itemize, description)
+\usepackage{enumitem}
+
+% Customize headers and footers
+\usepackage{fancyhdr}
+
+% Includegraphics support
+\usepackage{graphicx}
+
+% Allows to change text color
+\usepackage[usenames,dvipsnames,table<D-+>]{xcolor}
+
+% Assign the LastPage label to the last page
+\usepackage{lastpage}
+
+% Enable the creation of appendices
+\usepackage{appendix}
+
+% Support for lists
+\usepackage{etoolbox}
+\usepackage{fp}
+
+% Advanced templating support
+\newcommand{\settitle}[2]{%
+	\title{#1 -- #2}
+	\def\doctitle{#1}
+	\def\subtitle{#2}
+}
+\newcounter{mseaindex}
+\newcounter{mseacount}
+\newcommand{\addauthor}[1]{%
+	\listadd{\authors}{#1}
+	\stepcounter{mseacount}
+}
+\newcommand{\fmtauthor}[1]{#1}
+\newcommand{\lineslist}[1]{#1\\}
+\newcommand{\authorlines}{%
+	\setcounter{mseaindex}{0}%
+	\FPdiv{\limit}{\arabic{mseacount}}{2}%
+	\FPround{\limit}{\limit}{0}%
+	\renewcommand*{\do}[1]{%
+		\ifnumequal{\value{mseaindex}}{0}{}{\ifnumequal{\value{mseaindex}}{\limit}{}{, }}%
+		\ifnumequal{\value{mseaindex}}{\limit}{\\[0.7mm]\fmtauthor{##1}}{\fmtauthor{##1}}%
+		\stepcounter{mseaindex}%
+	}%
+	\dolistloop{\authors}%
+}
+
+% Set layout lenghts
+\setlength{\headheight}{8mm}
+\setlength{\footskip}{1.5cm}
+\addtolength{\textheight}{-.5cm}
+
+% Set titles whitespace
+\usepackage{titlesec}
+\titlespacing{\section}{0mm}{8mm}{1mm}
+\titlespacing{\subsection}{0mm}{3mm}{-2mm}
+\titlespacing{\subsubsection}{0mm}{2mm}{-1mm}
+
+% Enable code listings and set default options
+\usepackage{listings}
+\usepackage{courier} % Use Adobe Courier instead of Computer Modern Typewriter
+                     % for monospaced text
+\lstloadlanguages{python,bash,sh,xml}
+\lstset{
+	language=python,
+	basicstyle=\footnotesize\ttfamily,
+	stringstyle=\color{OliveGreen},
+	numbers=left,
+	numberstyle=\color{gray}\tiny,
+	commentstyle=\color{magenta},
+	keywordstyle=\color{MidnightBlue}\bfseries,
+	frame=bt,
+	rulecolor=\color{lightgray},
+	numbersep=7pt,
+	escapechar=!,
+	extendedchars=true,
+	captionpos=t,
+	breaklines=true,
+	showspaces=false,
+	showtabs=false,
+	tabsize=4,
+	xleftmargin=20pt,
+	framexleftmargin=20pt,
+	framexrightmargin=0pt,
+	framexbottommargin=0pt,
+	showstringspaces=false,
+}
+
+% Limit the TOC dept to sections and subsections
+\setcounter{tocdepth}{2}
+
+\usepackage{multirow} % Enable columns spawning multiple rows
+\usepackage{tabularx}
+\usepackage{booktabs} % Provides {top|middle|bottom}rule
+\usepackage{longtable} % Support for tables spawning multiple pages,
+                       % captions and footnotes.
+                       % Does not work in multicolumn environments
+% Define new tabularx column types:
+%  - R: streteched right aligned
+%  - C: stretched centered
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+\renewcommand{\arraystretch}{1.3} % Set row height multiplicator
+\usepackage{threeparttable} % Manual footnotes counter
+
+% Provide support for (indented) unnumbered chapter and section titles
+\usepackage{tocloft}
+\newcommand{\uchapter}[1]{
+	\chapter*{#1}
+	\addcontentsline{toc}{chapter}{\hspace{\cftchapnumwidth}#1}
+}
+\newcommand{\usection}[1]{
+	\section*{#1}
+	\addcontentsline{toc}{section}{\hspace{\cftsecnumwidth}#1}
+}
+
+% Color definitions
+\definecolor{highlightyellow}{RGB}{255,255,140}
+\definecolor{mselogogray}{RGB}{96,101,109} % Color definition for the MSE logo
+
+% Enable highlighting using \HighlightFrom and \HighlightTo
+\usepackage{classes/highlighter}
+\tikzset{highlighter/.style = {highlightyellow, line width = \baselineskip*.75}}
+ 
