@@ -1,3 +1,4 @@
 *.log
 */report/build
-*.pdf
+report.pdf
+03-modules/GeoIPCountryWhois.csv
