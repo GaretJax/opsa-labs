@@ -2,10 +2,9 @@
 
 \input{preamble}
 
-\settitle{Report title}{Report subtitle}
-\addauthor{Author \#1}
-\addauthor{Author \#2}
-\addauthor{Author \#3}
+\settitle{Lab. 04 -- Network scan}{Certified IT Security}
+\addauthor{Julien Oberson}
+\addauthor{Jonathan Stoppani}
 
 \input{headers-footers}
 
@@ -17,9 +16,128 @@
 \cleardoublepage
 \setcounter{page}{1}
 
-\section{Section title}
-\subsection{Subsection title}
-\subsubsection{Subsubsection title}
-Body text
+\section{Introduction}
+
+The goal of this laboratory session is to scan a given target (in this case, the scope is a local network segment) and find it's operational security, controls and limitations as defined by the OSSTMM.
+
+In our case, the target are all the hosts on the local network segment \texttt{160.98.20.46-66} and the attack vector is from any machine inside the room \texttt{C0022}.
+
+\section{Visibility and Access}
+
+The OSSTMM defines the \textit{Visibility} as \textit{the number of targets in the scope}. In order to get the most precise view possible of the system, we an ARP scan using \texttt{nmap}. The results of the \texttt{sudo nmap -sP -PR 160.98.20.46-66} command are illustrated in the \autoref{lst:arp-scan}.
+
+\lstset{label=lst:arp-scan,numbers=none,language=,caption=\texttt{nmap} ARP scan results}
+\begin{lstlisting}
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-03-19 11:48 CET
+Nmap scan report for c0022-1.tic.eia-fr.ch (160.98.20.46)
+Host is up (0.00050s latency).
+MAC Address: 00:19:D1:01:4C:A8 (Intel)
+Nmap scan report for c0022-3.tic.eia-fr.ch (160.98.20.48)
+Host is up (0.00053s latency).
+MAC Address: 00:19:D1:25:E3:DB (Intel)
+Nmap scan report for c0022-4.tic.eia-fr.ch (160.98.20.49)
+Host is up (0.00054s latency).
+MAC Address: 00:19:D1:25:E2:8F (Intel)
+Nmap scan report for c0022-5.tic.eia-fr.ch (160.98.20.50)
+Host is up (0.00055s latency).
+MAC Address: 00:19:D1:25:E3:25 (Intel)
+Nmap scan report for c0022-7.tic.eia-fr.ch (160.98.20.52)
+Host is up (0.00052s latency).
+MAC Address: 00:19:D1:25:E3:05 (Intel)
+Nmap scan report for c0022-8.tic.eia-fr.ch (160.98.20.53)
+Host is up (0.00053s latency).
+MAC Address: 00:19:D1:25:E3:E1 (Intel)
+Nmap scan report for c0022-10.tic.eia-fr.ch (160.98.20.55)
+Host is up (0.00051s latency).
+MAC Address: 00:19:D1:25:E3:F0 (Intel)
+Nmap scan report for c0022-15.tic.eia-fr.ch (160.98.20.60)
+Host is up (0.00052s latency).
+MAC Address: 00:19:D1:25:E4:7F (Intel)
+Nmap scan report for c0022-20.tic.eia-fr.ch (160.98.20.65)
+Host is up (0.00051s latency).
+MAC Address: 00:19:D1:25:E3:E9 (Intel)
+Nmap done: !\HighlightFrom!21 IP addresses (9 hosts up)!\HighlightTo! scanned in 0.27 seconds
+\end{lstlisting}
+
+As shown in the command output, 9 hosts where found to be up and accessible over the local network.
+
+\section{Access}
+
+\textit{Access} is the number of \textit{unique interacton points, regardless of how many different ways this interaction point can be probed}. In our specific case, this is the number of open TCP or UDP ports on each host.
+
+\texttt{nmap} makes it easy to scan different hosts at once by defining an IP address range (using the same syntax as for the previous section). The used command, in this case, are the following: \texttt{sudo nmap -sU 160.98.20.46-66} and \texttt{sudo nmap -sV -PN 160.98.20.46-66} (for UDP and TCP, respectively).
+
+\begin{table}
+\begin{threeparttable}[b]
+\begin{tabularx}{\textwidth}{ l | X | l | l l l }
+\toprule
+
+% Headers
+
+\multicolumn{2}{c|}{Host} &
+\multirow{2}{*}{Up} &
+\multicolumn{3}{c}{Open ports} \\
+\cline{1-2} \cline{4-6}
+IP address & Hostname & & TCP & UDP & Total \\
+\hline
+
+% Contents
+160.98.20.46 & 0 & 0 & 0 & 0 \\
+160.98.20.47 & 0 & 0 & 0 & 0 \\
+160.98.20.48 & 0 & 0 & 0 & 0 \\
+160.98.20.49 & 0 & 0 & 0 & 0 \\
+160.98.20.50 & 0 & 0 & 0 & 0 \\
+160.98.20.51 & 0 & 0 & 0 & 0 \\
+160.98.20.52 & 0 & 0 & 0 & 0 \\
+160.98.20.53 & 0 & 0 & 0 & 0 \\
+160.98.20.54 & 0 & 0 & 0 & 0 \\
+160.98.20.55 & 0 & 0 & 0 & 0 \\
+160.98.20.56 & 0 & 0 & 0 & 0 \\
+160.98.20.57 & 0 & 0 & 0 & 0 \\
+160.98.20.58 & 0 & 0 & 0 & 0 \\
+160.98.20.59 & 0 & 0 & 0 & 0 \\
+160.98.20.60 & 0 & 0 & 0 & 0 \\
+160.98.20.61 & 0 & 0 & 0 & 0 \\
+160.98.20.62 & 0 & 0 & 0 & 0 \\
+160.98.20.63 & 0 & 0 & 0 & 0 \\
+160.98.20.64 & 0 & 0 & 0 & 0 \\
+160.98.20.65 & 0 & 0 & 0 & 0 \\
+160.98.20.66 & 0 & 0 & 0 & 0 \\
+\hline
+
+\multicolumn{2}{c|}{Totals} & 0 & 0 & 0 & 0 \\
+
+
+\bottomrule
+\end{tabularx}
+
+\begin{tablenotes}
+	\item[1] Full service ID: \texttt{Apache httpd 2.2.21 ((Unix) mod\_ssl/2.2.21 OpenSSL/0.9.8r DAV/2 PHP/5.3.8 with Suhosin-Patch)}
+	\item[2] These services are provided by proprietary OS packages and their version is bundled to the version of the specific OS version.
+\end{tablenotes}
+
+\caption{Summary of open ports, service information as detected by \texttt{nmap} and processes found by locally inspecting the target}
+\label{tab:report}
+\end{threeparttable}
+\end{table}
+
+
+\section{Trust}
+
+\section{Class A -- Interactive Controls}
+
+\section{Class B -- Process Controls}
+
+\section{Limitations}
+
+\subsection{Vulnerabilities}
+
+\subsection{Weaknesses}
+
+\subsection{Concerns}
+
+\subsection{Exposures}
+
+\subsection{Anomalies}
 
 \end{document}
