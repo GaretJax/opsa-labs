@@ -20,9 +20,12 @@
 
 The goal of this laboratory session is to scan a given target (in this case, the scope is a local network segment) and find it's operational security, controls and limitations as defined by the OSSTMM.
 
-In our case, the target are all the hosts on the local network segment \texttt{160.98.20.46-66} and the attack vector is from any machine inside the room \texttt{C0022}.
+In our case, the scope are all the hosts on the local network segment \texttt{160.98.20.46-66} and the attack vector is from any machine inside the room \texttt{C0022} (Inside Network).
 
-\section{Visibility and Access}
+%******************************************************************************%
+%******************************************************************************%
+
+\section{Visibility}
 
 The OSSTMM defines the \textit{Visibility} as \textit{the number of targets in the scope}. In order to get the most precise view possible of the system, we an ARP scan using \texttt{nmap}. The results of the \texttt{sudo nmap -sP -PR 160.98.20.46-66} command are illustrated in the \autoref{lst:arp-scan}.
 
@@ -61,83 +64,309 @@ Nmap done: !\HighlightFrom!21 IP addresses (9 hosts up)!\HighlightTo! scanned in
 
 As shown in the command output, 9 hosts where found to be up and accessible over the local network.
 
+%******************************************************************************%
+%******************************************************************************%
+
 \section{Access}
 
 \textit{Access} is the number of \textit{unique interacton points, regardless of how many different ways this interaction point can be probed}. In our specific case, this is the number of open TCP or UDP ports on each host.
 
 \texttt{nmap} makes it easy to scan different hosts at once by defining an IP address range (using the same syntax as for the previous section). The used command, in this case, are the following: \texttt{sudo nmap -sU 160.98.20.46-66} and \texttt{sudo nmap -sV -PN 160.98.20.46-66} (for UDP and TCP, respectively).
 
+This chapter and the rest of this document is based on nmap scan results. You can find these results in annexes A and B. The \autoref{tab:report} resume scan results and interpretations.
+
 \begin{table}
 \begin{threeparttable}[b]
-\begin{tabularx}{\textwidth}{ l | X | l | l l l }
+\begin{tabularx}{\textwidth}{ l | l | X X X | X X X X X | X X X X X | X X X X X }
 \toprule
 
 % Headers
 
-\multicolumn{2}{c|}{Host} &
+\multirow{2}{*}{IP address} &
 \multirow{2}{*}{Up} &
-\multicolumn{3}{c}{Open ports} \\
-\cline{1-2} \cline{4-6}
-IP address & Hostname & & TCP & UDP & Total \\
+\multicolumn{3}{c|}{Open ports} &
+\multicolumn{5}{c|}{Control Class A} &
+\multicolumn{5}{c|}{Control Class B} &
+\multicolumn{5}{c}{Limitation} \\
+\cline{3-20}
+& & T & U & S & A & I & S & C & R & N & C & P & I & A & V & W & C & E & A\\
 \hline
 
 % Contents
-160.98.20.46 & 0 & 0 & 0 & 0 \\
-160.98.20.47 & 0 & 0 & 0 & 0 \\
-160.98.20.48 & 0 & 0 & 0 & 0 \\
-160.98.20.49 & 0 & 0 & 0 & 0 \\
-160.98.20.50 & 0 & 0 & 0 & 0 \\
-160.98.20.51 & 0 & 0 & 0 & 0 \\
-160.98.20.52 & 0 & 0 & 0 & 0 \\
-160.98.20.53 & 0 & 0 & 0 & 0 \\
-160.98.20.54 & 0 & 0 & 0 & 0 \\
-160.98.20.55 & 0 & 0 & 0 & 0 \\
-160.98.20.56 & 0 & 0 & 0 & 0 \\
-160.98.20.57 & 0 & 0 & 0 & 0 \\
-160.98.20.58 & 0 & 0 & 0 & 0 \\
-160.98.20.59 & 0 & 0 & 0 & 0 \\
-160.98.20.60 & 0 & 0 & 0 & 0 \\
-160.98.20.61 & 0 & 0 & 0 & 0 \\
-160.98.20.62 & 0 & 0 & 0 & 0 \\
-160.98.20.63 & 0 & 0 & 0 & 0 \\
-160.98.20.64 & 0 & 0 & 0 & 0 \\
-160.98.20.65 & 0 & 0 & 0 & 0 \\
-160.98.20.66 & 0 & 0 & 0 & 0 \\
+160.98.20.46 & 1 & 6 & 1 & 7 & 2 & 0 & 0 & 0 & 0 & 2 & 1 & 1 & 1 & 1 & 0 & 4 & 0 & 4 & 0 \\
+160.98.20.47 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.48 & 1 & 3 & 3 & 6 & 2 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 2 & 0 \\
+160.98.20.49 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\
+160.98.20.50 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\
+160.98.20.51 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.52 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\
+160.98.20.53 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.54 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.55 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\
+160.98.20.56 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.57 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.58 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.59 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.60 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\
+160.98.20.61 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.62 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.63 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.64 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+160.98.20.65 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 2 & 0 & 1 & 0 \\
+160.98.20.66 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 \hline
 
-\multicolumn{2}{c|}{Totals} & 0 & 0 & 0 & 0 \\
-
+\multicolumn{1}{r|}{Totals} & 8 & 15 & 7 & 22 & 10 & 0 & 0 & 0 & 0 & 9 & 8 & 8 & 8 & 1 & 0 & 18 & 0 & 12 & 0\\
 
 \bottomrule
 \end{tabularx}
-
-\begin{tablenotes}
-	\item[1] Full service ID: \texttt{Apache httpd 2.2.21 ((Unix) mod\_ssl/2.2.21 OpenSSL/0.9.8r DAV/2 PHP/5.3.8 with Suhosin-Patch)}
-	\item[2] These services are provided by proprietary OS packages and their version is bundled to the version of the specific OS version.
-\end{tablenotes}
 
 \caption{Summary of open ports, service information as detected by \texttt{nmap} and processes found by locally inspecting the target}
 \label{tab:report}
 \end{threeparttable}
 \end{table}
 
+%******************************************************************************%
+%******************************************************************************%
 
 \section{Trust}
 
+Trust is the determination of trust relationships from and between the targets. A trust relationship exists wherever the target accepts interaction freely and without credentials.
+
+In this scope, trust is not relevant, so we won't consider it.
+
+%******************************************************************************%
+%******************************************************************************%
+
 \section{Class A -- Interactive Controls}
+
+In this chapter, we explain how values of differents controls A (presented in the previous table) is obtained. 
+
+\subsection{Autentication}
+
+- SSH services on all hosts ask for a password\\
+- Telnet service ask for a password\\
+- VMWare SSL/Auth ask for a password\\
+- VMWare Auth ask for a password
+
+\subsection{Indemnification}
+
+There is not idenmnification measures observed on discovered services.
+
+\subsection{Resilience}
+
+These hosts are workstation and not server. Resilience measure are not implemented in the discovered applications. This information is known because we simulate a test in which scope hosts are known (Tandem test).
+
+\subsection{Subjugation}
+
+There is not subjugation measures observed on discovered services.
+
+\subsection{Continuity}
+
+These hosts are workstation and not server. Continuity measure are not implemented in the discovered applications. This information is known because we simulate a test in which scope hosts are known (Tandem test).
+
+%******************************************************************************%
+%******************************************************************************%
 
 \section{Class B -- Process Controls}
 
+In this chapter, we explain how values of differents controls B (presented in the previous table) is obtained.
+
+\subsection{Non-Repudiation}
+
+- SSH login attempt (success \& fail) are logged in system logs\\
+- VMWare SSL/Auth login attempt (success \& fail) are logged in vmware logs\\
+- VMWare Auth login attempt (success \& fail) are logged in vmware logs
+
+\subsection{Confidentility \& Authenticity \& Integrity}
+
+- SSH communications are encrypted, authenticated and integrates\\
+- VMWare SSL/Auth communications are encrypted, authenticated and integrates
+
+\subsection{Alarm}
+
+Linux hosts are workstation without any antivirus nor IDS. 160.98.20.46 is a windows host with an antivirus which can give alarm.
+
+This information is known because we simulate a test in which scope hosts are known (Tandem test).
+
+%******************************************************************************%
+%******************************************************************************%
+
 \section{Limitations}
-
-\subsection{Vulnerabilities}
-
-\subsection{Weaknesses}
-
-\subsection{Concerns}
 
 \subsection{Exposures}
 
+In this section we report given informations which are not required.
+
+- Microsoft Windows RPC give software used\\
+- SSH server give software and version used\\
+- Vmware Authentification Deamon give his version\\
+- Vmware Authentification Deamon with SSL give his version\\
+- Tenlet server give software used\\
+- NAI EPO Agent give software and version used
+
+\subsection{Vulnerabilities}
+
+There is not vulnerability observed on discovered services.
+
+\subsection{Weaknesses}
+
+Version of the SSH Serveur is OpenSSH 5.6. This version have two known vulnerabilty CVE-2010-4478, CVE-2010-4478. These two vulnerability don't permit to access directly the machine, this is a weakness and not a vunerability.
+
+Version of vmware-auth daemon have four known vulnerabilty CVE-2009-4811, CVE-2009-3707, CVE-2009-0177, CVE-2008-0967. These four vulnerability don't permit to access directly the machine, this is a weakness and not a vunerability.
+
+\subsection{Concerns}
+
+There is not concerns observed on discovered services.
+
 \subsection{Anomalies}
+
+There is not anomalies observed on discovered services.
+
+%******************************************************************************%
+%******************************************************************************%
+
+\clearpage
+
+\section{Annexe}
+
+\subsection{Annexe A - nmap TCP Scan Result}
+
+\lstset{label=lst:tcp-scan,numbers=none,language=,caption=\texttt{nmap} TCP scan results}
+\begin{lstlisting}
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-03-19 12:50 CET
+Nmap scan report for c0022-1.tic.eia-fr.ch (160.98.20.46)
+Host is up (0.00070s latency).
+Not shown: 994 filtered ports
+PORT     STATE SERVICE         VERSION
+135/tcp  open  msrpc           Microsoft Windows RPC
+139/tcp  open  netbios-ssn
+445/tcp  open  netbios-ssn
+902/tcp  open  ssl/vmware-auth VMware Authentication Daemon 1.10 (Uses VNC, SOAP)
+912/tcp  open  vmware-auth     VMware Authentication Daemon 1.0 (Uses VNC, SOAP)
+8081/tcp open  http            NAI EPO Agent framework (Agent ListenServer 1.0)
+MAC Address: 00:19:D1:01:4C:A8 (Intel)
+Service Info: OS: Windows
+
+Nmap scan report for c0022-3.tic.eia-fr.ch (160.98.20.48)
+Host is up (0.00044s latency).
+Not shown: 997 closed ports
+PORT    STATE SERVICE VERSION
+22/tcp  open  ssh     OpenSSH 5.6 (protocol 2.0)
+23/tcp  open  telnet  Linux telnetd
+111/tcp open  rpcbind
+MAC Address: 00:19:D1:25:E3:DB (Intel)
+Service Info: OS: Linux
+
+Nmap scan report for c0022-4.tic.eia-fr.ch (160.98.20.49)
+Host is up (0.00053s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.6 (protocol 2.0)
+MAC Address: 00:19:D1:25:E2:8F (Intel)
+
+Nmap scan report for c0022-5.tic.eia-fr.ch (160.98.20.50)
+Host is up (0.00054s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.6 (protocol 2.0)
+MAC Address: 00:19:D1:25:E3:25 (Intel)
+
+Nmap scan report for c0022-7.tic.eia-fr.ch (160.98.20.52)
+Host is up (0.00055s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.6 (protocol 2.0)
+MAC Address: 00:19:D1:25:E3:05 (Intel)
+
+Nmap scan report for c0022-10.tic.eia-fr.ch (160.98.20.55)
+Host is up (0.00054s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.6 (protocol 2.0)
+MAC Address: 00:19:D1:25:E3:F0 (Intel)
+
+Nmap scan report for c0022-15.tic.eia-fr.ch (160.98.20.60)
+Host is up (0.00054s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.6 (protocol 2.0)
+MAC Address: 00:19:D1:25:E4:7F (Intel)
+
+Nmap scan report for c0022-20.tic.eia-fr.ch (160.98.20.65)
+Host is up (0.00054s latency).
+Not shown: 999 filtered ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 5.6 (protocol 2.0)
+MAC Address: 00:19:D1:25:E3:E9 (Intel)
+
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 21 IP addresses (8 hosts up) scanned in 22.71 seconds
+\end{lstlisting}
+
+\subsection{Annexe B - nmap UDP Scan Result}
+
+\lstset{label=lst:udp-scan,numbers=none,language=,caption=\texttt{nmap} UDP scan results}
+\begin{lstlisting}
+Starting Nmap 5.21 ( http://nmap.org ) at 2012-03-19 13:07 CET
+Nmap scan report for c0022-1.tic.eia-fr.ch (160.98.20.46)
+Host is up (0.00072s latency).
+Not shown: 999 open|filtered ports
+PORT    STATE SERVICE
+137/udp open  netbios-ns
+MAC Address: 00:19:D1:01:4C:A8 (Intel)
+
+Nmap scan report for c0022-3.tic.eia-fr.ch (160.98.20.48)
+Host is up (0.00058s latency).
+Not shown: 994 closed ports
+PORT     STATE         SERVICE
+68/udp   open|filtered dhcpc
+111/udp  open          rpcbind
+123/udp  open          ntp
+631/udp  open|filtered ipp
+643/udp  open|filtered unknown
+5353/udp open          zeroconf
+MAC Address: 00:19:D1:25:E3:DB (Intel)
+
+Nmap scan report for c0022-4.tic.eia-fr.ch (160.98.20.49)
+Host is up (0.00056s latency).
+All 1000 scanned ports on c0022-4.tic.eia-fr.ch (160.98.20.49) are filtered
+MAC Address: 00:19:D1:25:E2:8F (Intel)
+
+Nmap scan report for c0022-5.tic.eia-fr.ch (160.98.20.50)
+Host is up (0.00053s latency).
+All 1000 scanned ports on c0022-5.tic.eia-fr.ch (160.98.20.50) are filtered
+MAC Address: 00:19:D1:25:E3:25 (Intel)
+
+Nmap scan report for c0022-7.tic.eia-fr.ch (160.98.20.52)
+Host is up (0.00054s latency).
+All 1000 scanned ports on c0022-7.tic.eia-fr.ch (160.98.20.52) are filtered
+MAC Address: 00:19:D1:25:E3:05 (Intel)
+
+Nmap scan report for c0022-10.tic.eia-fr.ch (160.98.20.55)
+Host is up (0.00057s latency).
+All 1000 scanned ports on c0022-10.tic.eia-fr.ch (160.98.20.55) are filtered
+MAC Address: 00:19:D1:25:E3:F0 (Intel)
+
+Nmap scan report for c0022-15.tic.eia-fr.ch (160.98.20.60)
+Host is up (0.00057s latency).
+All 1000 scanned ports on c0022-15.tic.eia-fr.ch (160.98.20.60) are filtered
+MAC Address: 00:19:D1:25:E4:7F (Intel)
+
+Nmap scan report for c0022-20.tic.eia-fr.ch (160.98.20.65)
+Host is up (0.00054s latency).
+All 1000 scanned ports on c0022-20.tic.eia-fr.ch (160.98.20.65) are filtered
+MAC Address: 00:19:D1:25:E3:E9 (Intel)
+
+Nmap done: 21 IP addresses (8 hosts up) scanned in 1086.60 seconds
+\end{lstlisting}
+
+\subsection{Annexe C - RAV sheet for 160.98.20.46 and entire scope}
+
+RAV sheet is proposed for a specific host (160.98.20.46) then for entire scope. Values come from table 1.
+
+\includepdf{data/160982046.pdf}
+
+\includepdf{data/global.pdf}
 
 \end{document}
