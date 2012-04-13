@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper,twoside,onecolumn]{article}
+
+\input{preamble}
+
+\settitle{Lab. 05 – Network Information}{Certified IT Security}
+\addauthor{Julien Oberson}
+\addauthor{Jonathan Stoppani}
+
+\input{headers-footers}
+
+
+%-----------------------------------------------------------------------------
+% Use special numbering and formatting to match the questions numbering in the
+% workbook document
+\usepackage{chngcntr}
+
+% First question is #16
+\setcounter{section}{15}
+
+% Questions are broken down by different listings
+\def\thesubsection{Listing \arabic{subsection}:}
+
+% Single questions are numbered using letters
+\def\thesubsubsection{\alph{subsubsection})}
+
+% Single questions numbering is identical for whole global questions
+\counterwithout*{subsubsection}{subsection}
+\counterwithin*{subsubsection}{section}
+
+% Adapt spacing in the TOC to account for numbering scheme
+\setlength\cftsubsubsecnumwidth{1.5em}
+\setlength\cftsubsecnumwidth{4.1em}
+%-----------------------------------------------------------------------------
+
+
+\begin{document}
+
+	\input{title}
+
+	\content
+
+	\include{contents/mail}
+	\include{contents/http}
+	\include{contents/whois}
+	\include{contents/dns}
+
+	\appendix
+
+	\include{appendices/references}
+
+\end{document}

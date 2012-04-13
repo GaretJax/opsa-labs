@@ -1,0 +1,47 @@
+\section{DNS queries analysis}
+
+\subsection{\texttt{salleurl.edu} DNS request}
+
+\subsubsection{Primary name server}
+
+TODO: Is it possible to say for sure the the primary is aries? Or is it not yet known which one is the primary one?
+
+The primary name server for the {\tt salleurl.edu} domain is {\tt aries.salleurl.edu}. Two additional name servers are also available, namely {\tt relay1.salleurl.edu} and {\tt relay2.salleurl.edu}.
+
+\subsubsection{Extracted domains and IP addresses}
+
+The {\tt salleurl.edu} domain binds to the IP address {\tt 130.206.42.160}.
+
+Three additional hostnames (the three DNS servers presented in the preceding answer) were also discovered. Their IPs are {\tt 130.206.42.224}, {\tt 130.206.42.224} and {\tt 130.206.42.123} for {\tt aries.}, {\tt relay1.} and {\tt relay2.salleurl.edu}, respectively.
+
+\subsubsection{Purpose of the test}
+
+TODO: ???
+
+
+
+\subsection{\texttt{salleurl.edu} authoritative DNS request}
+
+\subsubsection{Primary name server}
+
+The primary name server for the {\tt salleurl.edu} domain is {\tt aries.salleurl.edu}, as clearly indicated by the {\tt MNAME} field of the {\tt SOA} record.
+
+\subsubsection{Extracted domains and IP addresses}
+
+Beside the name servers and the root domain already presented in the previous answer, this test revelaed one more hostname: {\tt columba.salleurl.edu} with the IP address {\tt 130.206.42.238}. Additionally, the four {\tt MX} records state that all of {\tt aries.}, {\tt relay1.}, {\tt relay2.} and {\tt columba.salleurl.edu} are also mail exchange servers.
+
+\subsubsection{Purpose of the test}
+
+The purpose of this test is to retrieve all DNS information (using the {\tt any} flag) for the {\tt salleurl.edu} domain by interrogating the primary name server ({\tt aries.salleurl.edu}) directly and obtaining thus an authoritative answer.
+
+
+
+\subsection{\texttt{salleurl.edu} complete DNS listing}
+
+\subsubsection{Purpose of the test}
+
+The prupose of this test is to execute a zone transfer for the {\tt salleurl.edu} domain from one of its name servers. A zone transfer would allow the requester to retrieve all the DNS information for the {\tt salleurl.edu} domain stored on the queried name server.
+
+\subsubsection{Test results}
+
+All three tested name servers ({\tt aries.}, {\tt relay1.} and {\tt relay2.salleurl.edu}) denied the zone transfer and revelead no additional information.

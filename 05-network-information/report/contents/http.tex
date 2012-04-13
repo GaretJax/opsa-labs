@@ -1,0 +1,65 @@
+\section{HTTP headers analysis}
+
+\subsection{\texttt{302 Moved Temporarily} response}
+
+\subsubsection{Reasons for the 302 error}
+TODO
+
+\subsubsection{Changes between HTTP/1.0 and HTTP/1.1}
+TODO
+
+
+
+\subsection{\texttt{200 OK} response}
+
+\subsubsection{Type of the server}
+
+As indicated by the {\tt Server} response header, the server runs {\tt Apache} version {\tt 1.3.27}.
+
+\subsubsection{Determination of virtual hosting}
+TODO
+
+
+
+\subsection{\texttt{OPTIONS} request}
+
+\subsubsection{Request type and information}
+
+The request is an {\tt OPTIONS} request. The HTTP/1.1 specifications describes this request type as:
+
+\begin{quote}
+The OPTIONS method represents a request for information about the communication options available on the request/response chain identified by the Request-URI. This method allows the client to determine the options and/or requirements associated with a resource, or the capabilities of a server, without implying a resource action or initiating a resource retrieval.
+\end{quote}
+
+In this specific case, the webserver itself does accept all request types defined by HTTP/1.1, namely: {\tt GET}, {\tt POST}, {\tt HEAD}, {\tt PUT}, {\tt DELETE}, {\tt CONNECT}, {\tt OPTIONS} and {\tt TRACE} (including the {\tt PATCH} extension). Additionally, the {\tt PROPFIND}, {\tt PROPPATCH}, {\tt MKCOL}, {\tt COPY}, {\tt MOVE}, {\tt LOCK} and {\tt UNLOCK} WebDAV methods are also supported.
+
+\subsubsection{Discovered weaknesses}
+
+By including the WebDAV methods in the reply, the server exposes its WebDAV handling capabilities. If WebDAV access isn't properly protected through the use of authentication and authorization, this can led to public access to the website and, in a worse-case scenario, to other important assets stored on the server.
+
+
+
+\subsection{\texttt{GET} request with \texttt{REFERRER}}
+
+\subsubsection{Server type}
+
+The returned server type is a custom Rapidsite\footnote{Rapidsite is an hostig provider registered in the United States: \url{http://www.rapidsite.net/}} branded version of {\tt Apache} (version {\tt 1.3.27}) running on some flavor of Unix. Additionally, the FrontPage extensions (version {\tt 5.0.2.2510}) and the SSL module (version {\tt 2.8.12} with {\tt OpenSSL} version {\tt 0.9.7a}) are installed.
+
+\subsubsection{Determination of virtual hosting for www.isecom.info}
+TODO
+
+\subsubsection{Discovered weaknesses}
+
+The installed FrontPage server extensions are a serious security risk if not correctly configured as they allow remote files uploading and expose dynamic components to be used insite web pages (such as counters, server-side image maps, search forms,...).
+
+Considered the {\tt ETag} timestamp (June 2003), {\tt Apache/1.3.28} was just released and {\tt OpenSSL} was not yet outdated; the installed software does not pose thus a security risk. If, instead, we consider the current date (April, 2010) and the current versions of the software used by Rapidsite\footnote{A rapid check revelead that Rapidsite is still using outdated packages: {\tt Apache/1.3.33}, the same {\tt FrontPage} server extensions and {\tt OpenSSL/0.9.8d} (released in September 2006).}, there is an urgent need to upgrade the whole server software stack.
+
+
+
+\subsection{\texttt{GET} request with blank \texttt{HOST}}
+
+\subsubsection{Information inferred from the test}
+TODO
+
+\subsubsection{Changes to be made to extract more information}
+TODO
